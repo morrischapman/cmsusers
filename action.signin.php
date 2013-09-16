@@ -1,6 +1,8 @@
 <?php
 if(!cmsms()) exit;
 
+/** @var $this CMSUsers */
+
 if ($this->getPreference('allow_signin') != 1)
 {
 	$this->smarty->assign('message', $this->lang('signin disabled'));
@@ -42,9 +44,15 @@ else
 
 $form->setWidget('password','password', array('size' => '40'));
 
-if ($form->isPosted())
+if ($form->isSent())
 {
-	$user = CMSUser::retrieveByUsername($form->getWidget('username')->getValue());
+    $user = CMSUser::retrieveByUsername($form->getWidget('username')->getValue()); // First: Local users
+
+    if((!$user || $user->is_ldap == true) && $this->getPreference('ldap_auth', false))
+    {
+        $user = CMSUser::retrieveByLdap($form->getWidget('username')->getValue(), $form->getWidget('password')->getValue());
+    }
+
 		
 	if ($user && $user->authenticate($form->getWidget('password')->getValue()))
 	{

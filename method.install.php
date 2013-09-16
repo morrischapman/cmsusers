@@ -18,6 +18,7 @@ $flds = array(
 	'created_at DT',
 	'updated_at DT',
 	'last_login DT',
+    'is_ldap I',
 	'comments	XL'
 );
 
@@ -156,3 +157,4 @@ $this->SetPreference('validation_email_subject',  $this->lang('account validatio
 $this->SetPreference('password_reset_email_subject',  $this->lang('account reset password'));
 $this->SetPreference('htpassword_title',  $this->lang('authentication_title'));
 $this->SetPreference('htpassword_path',  $config['root_path']);
+$this->SetPreference('ldap_server_port',  389);

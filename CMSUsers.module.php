@@ -7,14 +7,13 @@
   License: GPL
 */
 
-require_once dirname(__FILE__) . '/lib/class.CMSUser.php';
-require_once dirname(__FILE__) . '/lib/class.CMSProfile.php';
-require_once dirname(__FILE__) . '/lib/class.CMSGroup.php';
-require_once dirname(__FILE__) . '/lib/class.CMSUserGroup.php';
-require_once dirname(__FILE__) . '/lib/class.CMSPermission.php';
-require_once dirname(__FILE__) . '/lib/class.CMSGroupPermission.php';
-require_once dirname(__FILE__) . '/lib/class.CMSProfileField.php';
-require_once dirname(__FILE__) . '/lib/class.CMSGroupProfileField.php';
+//    require_once('lib/class.CMSUser.php');
+//    require_once('lib/class.CMSProfile.php');
+//    require_once('lib/class.CMSProfileField.php');
+//    require_once('lib/class.CMSPermission.php');
+//    require_once('lib/class.CMSGroupProfileField.php');
+//    require_once('lib/class.CMSGroupPermission.php');
+//    require_once('lib/class.CMSGroup.php');
 
 class CMSUsers extends CMSModule
 {
@@ -65,13 +64,13 @@ class CMSUsers extends CMSModule
   
   public function GetName()                {  return 'CMSUsers';   }
   public function GetFriendlyName()        {  return 'CMS Users';  }
-  public function GetVersion()             { return '1.0.14'; }
+  public function GetVersion()             { return '1.0.15'; }
   public function GetAuthor()              { return 'Jean-Christophe Cuvelier'; }
   public function GetAuthorEmail()         { return 'cybertotophe@gmail.com'; }
   public function HasAdmin()               { return true; }
   public function VisibleToAdminUser()     { return $this->CheckAccess(); }
   public function CheckAccess()            { return $this->CheckPermission('Manage CMSUsers'); }
-  public function GetDependencies()        { return array('CMSForms' => '0.0.24'); }
+  public function GetDependencies()        { return array('CMSForms' => '1.10.10'); }
   public function GetAdminSection()        { return 'usersgroups';  }
   public function GetHelp()                { return $this->lang('help'); }
   public function MinimumCMSVersion()    { return '1.10';  }
@@ -84,20 +83,21 @@ class CMSUsers extends CMSModule
     return false;
   }
   
-  public function SetParameters()
-  {
-    if(!isset($this->initialized))
-    {
-     $this->initialized = true;
-       // $this->InitializeAdmin(); // TODO: Useless
-       $this->InitializeFrontend(); 
-    }
-  }
+//  public function SetParameters()
+//  {
+//    if(!isset($this->initialized))
+//    {
+//     $this->initialized = true;
+//       // $this->InitializeAdmin(); // TODO: Useless
+//       $this->InitializeFrontend();
+//    }
+//  }
   
   public function InitializeFrontend() {  
         $this->RegisterModulePlugin();
         $this->SetupRoutes();
-        $this->loadUser(); // Use the smarty {CMSUser} instead
+
+//        $this->loadUser(); // Use the smarty {CMSUser} instead
         $this->smarty->register_function('CMSUser',
                    array('CMSUsers','retrieveUser'));
   }
@@ -422,7 +422,7 @@ class CMSUsers extends CMSModule
       $cmsmailer->Send();
     }
   }
-  
+
   public static function jumpTo($url)
   {
     $url = self::parseUrl($url);
@@ -443,6 +443,8 @@ class CMSUsers extends CMSModule
     {
       header('Location: '.$url);
     }
+
+      return null;
   }
   
   private static function parseUrl($url)
