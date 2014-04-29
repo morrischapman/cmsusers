@@ -12,5 +12,7 @@ if(!cmsms()) exit;
 	{
 		return $this->Redirect($id,'signin',$returnid, array('redirect' => 'profile'));
 	}
-	
-	
+
+echo siteURL();
+
+//vaR_dump($_SERVER);

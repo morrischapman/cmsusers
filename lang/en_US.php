@@ -148,6 +148,8 @@
         'form_ldap_server_host'    => 'LDAP Server host',
         'form_ldap_server_port'    => 'LDAP Server port',
         'form_ldap_base_dn'    => 'LDAP Base DN',
+        'form_ldap_bind_dn' => 'LDAP Bind DN',
+        'form_ldap_bind_password' => 'LDAP Bind Password',
 
 
         'are you sure you want to delete this template' => 'Are you sure you want to delete this template?',

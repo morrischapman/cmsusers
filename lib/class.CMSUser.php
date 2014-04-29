@@ -55,14 +55,22 @@
             $auth = $this->checkPassword($password);
             if (($auth === true) && ($this->is_active == 1) && ($this->is_disabled != 1)) // If auth = true
             {
-                $this->last_login  = date('Y-m-d H:i:s');
-                $this->is_modified = true;
-                $this->save(false);
-                $this->authenticated = true;
+                $this->lastLogin();
 
                 return $auth;
             } else {
                 return false;
+            }
+        }
+
+        public function lastLogin()
+        {
+            if(!$this->authenticated)
+            {
+                $this->last_login  = date('Y-m-d H:i:s');
+                $this->is_modified = true;
+                $this->save(false);
+                $this->authenticated = true;
             }
         }
 
@@ -571,6 +579,6 @@
                 $data .= addslashes($user->username) . ':' . $user->htpassword . "\n";
             }
 
-            file_put_contents($file, $data);
+            return file_put_contents($file, $data);
         }
     }

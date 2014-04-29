@@ -8,6 +8,7 @@ if(!cmsms()) exit;
 	if ($user = CMSUsers::getUser())
 	{
 		return $this->Redirect($id,'profile',$returnid);
-	}
-	
+    }
+
 	echo $this->ProcessTemplateFor('default', $params);
+
